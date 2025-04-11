@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>روابطي</title>
+  <title>maktabat-mohanad</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
@@ -129,6 +129,53 @@
         transform: translateY(0);
       }
     }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 15px;
+      padding: 20px 25px;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      animation: fadeUp 0.4s ease forwards;
+    }
+
+    .modal h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #8e44ad;
+    }
+
+    .modal p {
+      font-size: 18px;
+      margin: 5px 0;
+      color: #444;
+    }
+
+    .close-btn {
+      margin-top: 15px;
+      padding: 8px 20px;
+      background-color: #8e44ad;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -140,7 +187,7 @@
   <img src="maktabat_mohanad.jpg" alt="مكتبة مهند" class="fade-up delay-2"/>
   <h2 class="fade-up delay-3">مـكـتـبـة مـهـنـد</h2>
   <p class="fade-up delay-4">
-    اسـتـنـسـاخ 🖨 ، كـبـس هـويـات 🪪 ، الـعـاب ⚽️ ، هـدايـا 🎁 ، قـرطـاسـيـة 📚 ،
+    اسـتـنـسـاخ 🖨 ، كـبـس هـويـات 🪪 ، الـعـاب ⚽ ، هـدايـا 🎁 ، قـرطـاسـيـة 📚 ،
     اسـتـمـارات وتـقـديـم اونـلايـن ✅ للـتواصل مـعـنا :-
   </p>
   <a class="button call fade-up delay-5" onclick="confirmCall()">
@@ -158,6 +205,24 @@
   <a class="button hours fade-up delay-7" onclick="showWorkingHours()">
     ‎أوقـات الـدوام <i class="fas fa-clock"></i>
   </a>
+</div>
+
+<!-- Modal for working hours -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3>🕓 أوقـات الـدوام</h3>
+    <p>📅 الأحد - الخميس:</p>
+    <p>⏰ 7:30 صباحاً - 2:30 ظهراً</p>
+    <p>⏰ 5:00 مساءً - 12:30 بعد منتصف الليل</p>
+    <br />
+    <p>📅 الجمعة:</p>
+    <p>⏰ 5:00 مساءً - 12:30 بعد منتصف الليل</p>
+    <br />
+    <p>📅 السبت:</p>
+    <p>⏰ 11:30 صباحاً - 2:30 ظهراً</p>
+    <p>⏰ 5:00 مساءً - 12:30 بعد منتصف الليل</p>
+    <button class="close-btn" onclick="closeModal()">إغلاق</button>
+  </div>
 </div>
 
 <div id="adminCounter" style="display:none; margin-top: 20px; color: red;">
@@ -180,8 +245,8 @@
     const col = i % cols;
     const offsetX = Math.random() * (spacingX - 5);
     const offsetY = Math.random() * (spacingY - 5);
-    img.style.left = `calc(${col * spacingX}% + ${offsetX}px)`;
-    img.style.top = `calc(${row * spacingY}% + ${offsetY}px)`;
+    img.style.left = calc(${col * spacingX}% + ${offsetX}px);
+    img.style.top = calc(${row * spacingY}% + ${offsetY}px);
     pattern.appendChild(img);
     stickerImages.push(img);
   }
@@ -220,16 +285,11 @@
   }
 
   function showWorkingHours() {
-    alert("🕓 أوقات الدوام:\n\n" +
-      "📅 الأحد - الخميس:\n" +
-      "⏰ 7:30 صباحاً - 2:30 ظهراً\n" +
-      "⏰ 5:00 مساءً - 12:30 بعد منتصف الليل\n\n" +
-      "📅 الجمعة:\n" +
-      "⏰ 5:00 مساءً - 12:30 بعد منتصف الليل\n\n" +
-      "📅 السبت:\n" +
-      "⏰ 11:30 صباحاً - 2:30 ظهراً\n" +
-      "⏰ 5:00 مساءً - 12:30 بعد منتصف الليل"
-    );
+    document.getElementById("modalOverlay").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("modalOverlay").style.display = "none";
   }
 
   const now = Date.now();
