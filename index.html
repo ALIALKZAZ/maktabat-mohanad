@@ -40,7 +40,7 @@
       background-color: #fff;
       border-radius: 35px;
       padding: 35px;
-      max-width: 235px;
+      max-width: 400px;
       margin: auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       animation: float 9s ease-in-out infinite;
@@ -57,11 +57,13 @@
     }
     h2 {
       margin: 10px 0;
+      font-size: 28px;
     }
     p {
       color: #555;
       margin-bottom: 20px;
-      font-size: 14px;
+      font-size: 20px;
+      font-weight: bold; 
     }
     a.button {
       display: flex;
@@ -70,11 +72,12 @@
       justify-content: center;
       gap: 15px;
       color: white;
-      padding: 15px;
-      margin: 8px 0;
+      padding: 18px;
+      margin: 10px 0;
       border-radius: 8px;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 20px;
+      font-weight: bold;
       transition: 0.9s;
       cursor: pointer;
     }
@@ -90,10 +93,11 @@
     a.telegram:active { box-shadow: 0 0 15px #0088cc; }
     a.map { background-color: #4a4a4a; }
     a.map:active { box-shadow: 0 0 15px #4a4a4a; }
-    a.comment { background-color: #ff9900; display: none; }
+    a.hours { background-color: #8e44ad; }
+    a.hours:active { box-shadow: 0 0 15px #8e44ad; }
 
     i {
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .secret-corner {
@@ -151,6 +155,9 @@
   <a class="button map fade-up delay-7" onclick="confirmNavigation('https://www.google.com/maps?q=33.295733,44.291481')">
     ‎مـوقـعـنا عـلـى الـخـريـطـة <i class="fas fa-map-marker-alt"></i>
   </a>
+  <a class="button hours fade-up delay-7" onclick="showWorkingHours()">
+    ‎أوقـات الـدوام <i class="fas fa-clock"></i>
+  </a>
 </div>
 
 <div id="adminCounter" style="display:none; margin-top: 20px; color: red;">
@@ -166,7 +173,6 @@
   const spacingY = 100 / rows;
 
   const stickerImages = [];
-
   for (let i = 0; i < rows * cols; i++) {
     const img = document.createElement("img");
     img.src = stickers[Math.floor(Math.random() * stickers.length)];
@@ -208,15 +214,33 @@
     } else if (url.includes("maps")) {
       message = "سوف يتم فتح موقع الخرائط، هل أنت متأكد؟";
     }
-
     if (confirm(message)) {
       window.location.href = url;
     }
   }
 
+  function showWorkingHours() {
+    alert("🕓 أوقات الدوام:\n\n" +
+      "📅 الأحد - الخميس:\n" +
+      "⏰ 7:30 صباحاً - 2:30 ظهراً\n" +
+      "⏰ 5:00 مساءً - 12:30 بعد منتصف الليل\n\n" +
+      "📅 الجمعة:\n" +
+      "⏰ 5:00 مساءً - 12:30 بعد منتصف الليل\n\n" +
+      "📅 السبت:\n" +
+      "⏰ 11:30 صباحاً - 2:30 ظهراً\n" +
+      "⏰ 5:00 مساءً - 12:30 بعد منتصف الليل"
+    );
+  }
+
+  const now = Date.now();
+  const lastVisit = localStorage.getItem("lastVisit");
   let total = localStorage.getItem("totalVisits") || 0;
-  total++;
-  localStorage.setItem("totalVisits", total);
+
+  if (!lastVisit || now - lastVisit > 24 * 60 * 60 * 1000) {
+    total++;
+    localStorage.setItem("totalVisits", total);
+    localStorage.setItem("lastVisit", now);
+  }
 
   const adminKey = "1999";
   const secretCorner = document.querySelector(".secret-corner");
@@ -227,7 +251,7 @@
       document.getElementById("adminCounter").style.display = "block";
       document.getElementById("totalVisits").textContent = total;
     } else {
-      alert("كود غير صحيح!");
+      alert("الكود غير صحيح!");
     }
   });
 </script>
