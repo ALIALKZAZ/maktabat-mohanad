@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>maktabat-mohanad</title>
+  <title>مكتبة مهند</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
@@ -63,7 +63,7 @@
       color: #555;
       margin-bottom: 20px;
       font-size: 20px;
-      font-weight: bold; 
+      font-weight: bold;
     }
     a.button {
       display: flex;
@@ -78,7 +78,7 @@
       text-decoration: none;
       font-size: 20px;
       font-weight: bold;
-      transition: 0.9s;
+      transition: 0.3s ease;
       cursor: pointer;
     }
     a.button:active {
@@ -130,7 +130,6 @@
       }
     }
 
-    /* Modal Styles */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -207,7 +206,6 @@
   </a>
 </div>
 
-<!-- Modal for working hours -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3>🕓 أوقـات الـدوام</h3>
@@ -245,8 +243,8 @@
     const col = i % cols;
     const offsetX = Math.random() * (spacingX - 5);
     const offsetY = Math.random() * (spacingY - 5);
-    img.style.left = calc(${col * spacingX}% + ${offsetX}px);
-    img.style.top = calc(${row * spacingY}% + ${offsetY}px);
+    img.style.left = `calc(${col * spacingX}% + ${offsetX}px)`;
+    img.style.top = `calc(${row * spacingY}% + ${offsetY}px)`;
     pattern.appendChild(img);
     stickerImages.push(img);
   }
