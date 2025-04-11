@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>روابطي</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      background-color: #b2d8d8;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+    .pattern-background {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .pattern-background img {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      object-fit: contain;
+      opacity: 0.10;
+      animation: rotate 35s linear infinite;
+      transition: opacity 0.5s ease;
+    }
+    @keyframes rotate {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 35px;
+      padding: 35px;
+      max-width: 235px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: float 9s ease-in-out infinite;
+      position: relative;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    img {
+      width: 180px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin: 10px 0;
+    }
+    p {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    a.button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      color: white;
+      padding: 15px;
+      margin: 8px 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.9s;
+      cursor: pointer;
+    }
+    a.button:active {
+      transform: scale(0.97);
+      opacity: 0.85;
+    }
+    a.call { background-color: #00BFFF; }
+    a.call:active { box-shadow: 0 0 15px #00BFFF; }
+    a.whatsapp { background-color: #25D366; }
+    a.whatsapp:active { box-shadow: 0 0 15px #25D366; }
+    a.telegram { background-color: #0088cc; }
+    a.telegram:active { box-shadow: 0 0 15px #0088cc; }
+    a.map { background-color: #4a4a4a; }
+    a.map:active { box-shadow: 0 0 15px #4a4a4a; }
+    a.comment { background-color: #ff9900; display: none; }
+
+    i {
+      font-size: 18px;
+    }
+
+    .secret-corner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 0.5s ease-out forwards;
+    }
+    .fade-up.delay-1 { animation-delay: 0.08s; }
+    .fade-up.delay-2 { animation-delay: 0.13s; }
+    .fade-up.delay-3 { animation-delay: 0.18s; }
+    .fade-up.delay-4 { animation-delay: 0.23s; }
+    .fade-up.delay-5 { animation-delay: 0.28s; }
+    .fade-up.delay-6 { animation-delay: 0.33s; }
+    .fade-up.delay-7 { animation-delay: 0.38s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="pattern-background" id="pattern"></div>
+
+<div class="container fade-up delay-1">
+  <div class="secret-corner" title="منطقة المبرمج"></div>
+  <img src="maktabat_mohanad.jpg" alt="مكتبة مهند" class="fade-up delay-2"/>
+  <h2 class="fade-up delay-3">مـكـتـبـة مـهـنـد</h2>
+  <p class="fade-up delay-4">
+    اسـتـنـسـاخ 🖨 ، كـبـس هـويـات 🪪 ، الـعـاب ⚽️ ، هـدايـا 🎁 ، قـرطـاسـيـة 📚 ،
+    اسـتـمـارات وتـقـديـم اونـلايـن ✅ للـتواصل مـعـنا :-
+  </p>
+  <a class="button call fade-up delay-5" onclick="confirmCall()">
+    ‎اتـصـل بـنا <i class="fas fa-phone"></i>
+  </a>
+  <a class="button whatsapp fade-up delay-6" onclick="confirmNavigation('https://wa.me/9647803415517')">
+    ‎حـسـابـنـا عـلـى الـواتـس اب <i class="fab fa-whatsapp"></i>
+  </a>
+  <a class="button telegram fade-up delay-7" onclick="confirmNavigation('https://t.me/Ltntl')">
+    ‎حـسـابنـا عـلـى الـتـلـكـرام <i class="fab fa-telegram"></i>
+  </a>
+  <a class="button map fade-up delay-7" onclick="confirmNavigation('https://www.google.com/maps?q=33.295733,44.291481')">
+    ‎مـوقـعـنا عـلـى الـخـريـطـة <i class="fas fa-map-marker-alt"></i>
+  </a>
+</div>
+
+<div id="adminCounter" style="display:none; margin-top: 20px; color: red;">
+  عدد الزوار الكلي: <span id="totalVisits">0</span>
+</div>
+
+<script>
+  const pattern = document.getElementById("pattern");
+  const stickers = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png"];
+  const rows = 8;
+  const cols = 8;
+  const spacingX = 100 / cols;
+  const spacingY = 100 / rows;
+
+  const stickerImages = [];
+
+  for (let i = 0; i < rows * cols; i++) {
+    const img = document.createElement("img");
+    img.src = stickers[Math.floor(Math.random() * stickers.length)];
+    const row = Math.floor(i / cols);
+    const col = i % cols;
+    const offsetX = Math.random() * (spacingX - 5);
+    const offsetY = Math.random() * (spacingY - 5);
+    img.style.left = `calc(${col * spacingX}% + ${offsetX}px)`;
+    img.style.top = `calc(${row * spacingY}% + ${offsetY}px)`;
+    pattern.appendChild(img);
+    stickerImages.push(img);
+  }
+
+  function switchStickers() {
+    stickerImages.forEach(img => {
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = stickers[Math.floor(Math.random() * stickers.length)];
+        img.style.opacity = 0.1;
+      }, 500);
+    });
+  }
+
+  setInterval(switchStickers, 7000);
+
+  function confirmCall() {
+    const confirmed = confirm("هل تريد الاتصال بمكتبة مهند؟");
+    if (confirmed) {
+      window.location.href = "tel:9647803415517";
+    }
+  }
+
+  function confirmNavigation(url) {
+    let message = "هل تريد المتابعة؟";
+    if (url.includes("wa.me")) {
+      message = "سوف يتم فتح الواتساب، هل أنت متأكد؟";
+    } else if (url.includes("t.me")) {
+      message = "سوف يتم فتح التلكرام، هل أنت متأكد؟";
+    } else if (url.includes("maps")) {
+      message = "سوف يتم فتح موقع الخرائط، هل أنت متأكد؟";
+    }
+
+    if (confirm(message)) {
+      window.location.href = url;
+    }
+  }
+
+  let total = localStorage.getItem("totalVisits") || 0;
+  total++;
+  localStorage.setItem("totalVisits", total);
+
+  const adminKey = "1999";
+  const secretCorner = document.querySelector(".secret-corner");
+
+  secretCorner.addEventListener("click", () => {
+    const code = prompt("أدخل كود المبرمج:");
+    if (code === adminKey) {
+      document.getElementById("adminCounter").style.display = "block";
+      document.getElementById("totalVisits").textContent = total;
+    } else {
+      alert("كود غير صحيح!");
+    }
+  });
+</script>
+
+</body>
+</html>
